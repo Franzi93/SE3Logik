@@ -1,0 +1,76 @@
+Blatt 2
+
+1) Anfragen an eine realtionale Datenbank
+?- vater_von(P1,X),mutter_von(X,P2).
+-> P1 ist der Großvater mütterlicher Seits von P2
+?- vater_von(X,P1),vater_von(X,P2),P1\=P2.
+-> P1 und P2 sind Kinder von X (Geschwister oder zumindest Halbgeschwister)
+?- mutter_von(X,P1),mutter_von(Y,X),mutter_von(Y,P2), vater_von(P2,Z),X\=P2.
+-> P2 ist die Tante/der Onkel von P1 
+?- mutter_von(X,P1),mutter_von(X,Y),mutter_von(Y,Z), vater_von(P2,Z),Y\=P1.
+-> P2 ist der Ehemann von P1's Schwester
+bzw. P2 ist der Vater der Nichte von P1.
+?- vater_von(X,P1),vater_von(Y,P2),mutter_von(Z,P1), mutter_von(Z,P2),P1\=P2,X\=Y.
+-> P1 und P2 sind Halbgeschwister, wahrscheinlich hat die Mutter Z neu geheiratet oder so... kaputte Familien sind kein schönes Hausaufgaben Thema! 
+
+2) Anfragen Teil 2
+1. ?- obj(Nummer, Art, bahnhofsstr, Hausnr, Baujahr).
+2. ?- obj(Nummer, Art, Straße, Hausnr, Baujahr), Baujahr<1950.
+3. ?- bew(Vorgangsnr, Objektnr, Verkaeufer, Kaeufer, Preis, Datum), Preis>300000.
+4. ?- bew(Vorgangsnr, Objektnr, Winner, Kaeufer, PreisGr, Datum2), bew(Vorgangsnr2, Objektnr, Verkaeufer, Winner, PreisKl, Datum1), PreisGr>PreisKl, Gewinn=PreisGr-PreisKl.
+5. ?- bew(Vorgangsnr1,Objektnr,_,_,_,_),bew(Vorgangsnr2,Objektnr,_,_,_,_), Vorgangsnr1\=Vorgangsnr2.
+6. (Wenn man außen vorläßt, dass ein Gebäude nach Kauf wieder verkauft worden sein kann.)
+?- bew(_,Objektnr1,_,Kaeufer,_,_),bew(_,Objektnr2,_,Kaeufer,_,_), Objektnr1>Objektnr2.
+3) Datenbankentwurf
+Unsere Datenbank simuliert ein Bibliothekssystem, in dem Nutzer Bücher ausleihen können. 
+
+Wer hat Hunger Games ausgeliehen?
+?- nutzer(Nutzernr, Nutzername, Nutzervorname), entliehen(_,Buchnr,Nutzernr,_), buch(Buchnr, hunger_games, _).
+Nutzernr = 1,
+Nutzername = neu,
+Nutzervorname = franziska,
+Buchnr = 2 ;
+
+Wie heißt der Autor von Twilight?
+?- buch(_, twilight, Autor).
+Autor = meyer.
+
+Welche Bücher hat der Nutzer Ralf Engelken ausgeliehen? 
+?- nutzer(Nutzernr, engelken, ralf), entliehen(_,Buchnr,Nutzernr,_), buch(Buchnr, Buch, _).
+Nutzernr = 2,
+Buchnr = 1,
+Buch = future_war.
+
+Welche ID hat das Buch Twilight?
+?- buch(Id, twilight, _).Id = 3.
+
+Welche Bücher sind nicht verliehen? (eine sehr unrealistische Abfrage ;) )
+?- buch(Id, Name, _), \+ entliehen(_,Id,_,_).
+Id = 4,
+Name = hitchhiker.
+
+4) Terminologische Grundlagen
+
+-Struktur
+Eine Struktur ist ein Objekt zum Speichern und Organisieren von Daten.
+In Prolog besteht eine Struktur aus einem Prädikatsnamen und einem oder mehreren Argumenten, z.B.:
+obj(Objektnummer, Objekttyp, Strassenname, Hausnummer, Baujahr).
+Eine Struktur, deren Argumente atomar, sind, heißt Grundstruktur, z.B.:
+obj(1, efh, gaertnerstr, 15, 2005).
+
+
+-Prädikat
+Ein Prädikat ist eine Menge von Grundstrukturen gleichen Namens und gleicher Stelligkeit, z.B.:
+obj(1, efh, gaertnerstr, 15, 2005).
+
+obj(2, efh, bahnhofsstr, 27, 1943).
+
+
+-Klausel
+Eine Klausel ist ein Fakt oder ein Ziel, kann also sowohl in der Datenbasis als auch in einer Abfrage vorkommen:
+obj(1, efh, gaertnerstr, 15, 2005).
+
+Bzw. 
+?- obj(1, efh, gaertnerstr, 15, 2005).
+
+
