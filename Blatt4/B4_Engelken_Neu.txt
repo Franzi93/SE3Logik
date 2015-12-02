@@ -1,0 +1,45 @@
+Aufgabe 1)
+Reflexiv: (a,a)
+Symmetrisch: (a,b)->(b,a)
+Transitiv: (a,b),(b,c)->(a,c)
+Funktional: (a,b),(a,c)->b=c
+
+A ist das Geburtsjahr von B
+Annahme: A ist ein Jahresdatum, B eine Person.
+Reflexiv: nein, ein Datum kann kein Geburtsjahr haben.
+Symmetrisch: nein, eine Person kann kein Datum sein.
+Transitiv: nein, siehe reflexiv.
+Funktional: nein, zwei Personen sind nicht dieselben, nur weil sie dasselbe Geburtsjahr haben.
+
+A ist Nachbargrundstück von B
+Annahme: Nachbar ist derjenige, der direkt nebenan wohnt; idR hat man also nur zwei 
+Reflexiv: nein, man kann kein Nachbar von sich selbst sein.
+Symmetrisch: ja, wenn ich der Nachbar von B bin, ist er auch mein Nachbar.
+Transitiv: nein, C ist erst der übernächste Nachbar von A 
+Funktional: nein, B und C haben A zwischen sich wohnen
+
+A ist leichter als B
+Reflexiv: nein, A kann nicht leichter sein als A 
+Symmetrisch: nein, wenn A leichter als B, ist B nicht leichter als A
+Transitiv: ja, A ist leichter als B und dementsprechend noch leichter als C
+Funktional: nein, B und C können ungleich sein
+
+A ist kleiner oder gleich B (a<=b)
+Reflexiv: ja, da a = a
+Symmetrisch: ja, wenn a = b, dann b = a
+Transitiv: gilt nur im Ausnahmefall das a=b und b=c ist, sonst nicht
+Funktional: nein, B und C können ungleich sein
+
+A hat schon einmal in einer Mannschaft mit B gespielt
+Annahme: A und B sind Mannschaftskameraden, also Personen
+Reflexiv: nein, man kann in diesem Zusammenhang nicht mit sich selbst spielen.
+Symmetrisch: ja
+Transitiv: nein, B kann auch mit einer Mannschaft gespielt haben, in der A nie war
+Funktional: nein, B und C können verschiedene Kameraden sein. Es sei denn, es geht um eine Sportart, in der man zu zweit spielt (Tennis?), dann würde es gelten.
+
+A ist kongruent zu B 
+(bei Zahlen: gilt, wenn beide bei Division durch den Modulo denselben Rest haben)
+Reflexiv: ja
+Symmetrisch: ja, Rest ändert sich ja nicht
+Transitiv: nein, außer der Modulo bleibt gleich. Dann ist der Rest bei A und B und C der selbe, ergo wäre A kongruent zu C. Ansonsten kann der Rest zwischen A,B und B,C auch unterschiedlich sein.
+Funktional: nein, A kann kongruent zu verschiedenen Zahlen sein.
