@@ -102,32 +102,47 @@ aggregate([H|T], Sum, Elements, MaxElements, NewArray, X) :-
 %Bei der Windenergie schwanken die Werte weitaus stärker und es ist kein Wochentag/Wochenend-Muster erkennbar.
 
 %Aufgabe 2.2
-use_module(library(clpfd),[]).
-same([_]).
-same([X,X|T]) :- same([X|T]).
 
-%nimmt eine M-elementige Liste von N elementigen Listen transformiert
+%prüft, ob eine Liste nur aus demselben Element besteht
+equal_elems([_]).
+equal_elems([X,X|T]) :- equal_elems([X|T]).
+
+%transponiert die MN Matrix in eine NM Matrix. 
 %matrixtransform(+Mn,?Nm)
 matrixtransform(Mn,Nm):-
 length(Mn,Length),
 length(B,Length),
-same(B),
-findall(A,maplist(nth0,B,Mn,A),Nm). %->ergibt alle Permutationen.. mist
-%same(B),findall(A,maplist(nth0,B,Mn,A),Nm). -> funktioniert, aber gibt noch zusätzlich jede menge mist aus
-%findall(X,(nth0(AllM,Mn,B),nth0(Elem,B,X)),Nm). ->funktioniert nur bei einem Element
+equal_elems(B),
+findall(A,maplist(nth0,B,Mn,A),Nm). 
 
-%Aufgabe 2.4
+/*
+matrixtransform([[1,2],[3,4],[5,6]],X).
+X = [[1, 3, 5], [2, 4, 6]] .
+
+use_module(library(clpfd),[]),transpose([[1,2],[3,4],[5,6]],X).
+false.							-> ?
+
+*/
+%Aufgabe2.2b
 
 float_plus(F1,F2,Result):-
 Result is F1+F2.
 
-%Berechnet eine Liste an Mittelwerten für jeden Zeitstempel
-lastprofil(LastList):-
+%gesamtstromverbrauch(?Total)
+gesamtstromverbrauch(Total):-
 findall(Stamps,energy_time_series(_,_,_,Stamps),List),
 matrixtransform(List,TList),
-findall(MResult,
+findall(Result,
 		(nth0(X,TList,Elem),
-			foldl(float_plus,Elem, 0, Result),
-			length(Elem,Length),
-			MResult is Result/Length),
-		LastList).
+			foldl(float_plus,Elem, 0, Result)),
+		Total).
+
+/*
+gesamtstromverbrauch(T).
+T = [44.79199999999999, 43.897, 43.61, 44.539, 44.035999999999994, 43.569, 41.55499999999999, 40.955999999999996, 42.092000000000006|...] 
+*/
+%Aufgabe 2.4
+
+
+
+
